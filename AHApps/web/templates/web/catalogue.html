@@ -1,0 +1,89 @@
+{% extends 'web\web_base.html' %}
+{% load static %}
+{% block title %}
+Catalogue
+{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block web %}
+
+<div class="d-flex justify-content-end mt-3">
+    <!-- Add catalogue trigger modal -->
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addCatalogue">
+        Add Catalogue
+    </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addCatalogue" tabindex="-1" aria-labelledby="addCatalogueLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCatalogueLabel">Add new catalogue</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Form for submitting the catalogue -->
+            <form action="{% url 'add_catalogue' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Catalogue image</label>
+                        <input type="file" class="form-control" id="image" name="image" placeholder="catalogue image...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="catalogue_category" class="form-label">Category</label>
+                        <select name="category" id="catalogue_category" class="form-select" multiple>
+                            <option value="" selected disabled>Choose catalogue category</option>
+                            <option value="Shape">Shape</option>
+                            <option value="Color">Color</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="catalogue title...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea name="content" id="content" class="form-control">Write something...</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Display the catalogue details -->
+<div class="container mt-5">
+    <h3>Catalogue Details</h3>
+    {% if catalogues %}
+        <div class="row">
+            {% for catalogue in catalogues %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <!-- Display the catalogue image -->
+                        <img src="{{ catalogue.image.url }}" class="card-img-top" alt="{{ catalogue.title }}">
+
+                        <div class="card-body">
+                            <!-- Display the catalogue title -->
+                            <h5 class="card-title">{{ catalogue.title }}</h5>
+
+                            <!-- Display the catalogue category -->
+                            <p class="card-text">Category:{{ catalogue.category }}</p>
+
+                            <!-- Display the catalogue content -->
+                            <p class="card-text">{{ catalogue.content }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No catalogues available.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

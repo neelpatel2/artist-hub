@@ -1,0 +1,74 @@
+{% extends 'web/auth_base.html' %}
+{% load static %}
+{% block title %}
+Reset Password
+{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .reset-password-container {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .reset-password-container h2 {
+        margin-bottom: 1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block auth %}
+<div class="reset-password-container">
+    <div class="d-flex justify-content-center">
+        <img src="{% static 'images/logo.png' %}" height="100px" alt="Logo">
+    </div>
+    <h2 class="text-center header-pacifico-regular">Reset Password</h2>
+     <!-- start message section -->
+     {% if messages %}
+     <!-- <div class="container-fluid"> -->
+     {% for message in messages %}
+     <div class="alert alert-dismissible fade show {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'warning' %}alert-warning{% elif message.tags == 'success' %}alert-success{% elif message.tags == 'info' %}alert-info{% endif %}"
+         role="alert">
+         {{ message }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+     </div>
+     {% endfor %}
+     <!-- </div> -->
+     {% endif %}
+     <!-- end message section -->
+    <form action="{% url 'password_reset_request' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{email}}" name="email">
+        <div class="mb-3">
+            <label for="otp" class="form-label">OTP</label>
+            <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" required>
+        </div>
+        <div class="mb-3">
+            <label for="new_password" class="form-label">New Password</label>
+            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password" required>
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm New Password" required>
+        </div>
+        <button type="submit" class="btn btn-dark w-100">Reset Password</button>
+        <div class="d-flex justify-content-between mt-2">
+            <a href="{% url 'login_view' %}">Login</a>
+            <a href="{% url 'register_view' %}">Register?</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
