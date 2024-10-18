@@ -46,6 +46,7 @@ CUSTOM_INSATLLED_APPS = [
     'AHApps.master',
     'AHApps.web',
     'AHApps.artist',
+    'AHApps.webapp'
 ]
 
 # Third Party Application
@@ -123,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -138,16 +139,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+UNSPLASH_ACCESS_KEY='lrGLkETccKMr0sudzAPKVrfNQYh8yme4N6KJyFXBAsA'
+NEWS_DATA_API_KEY = 'ec867acc1aac48ef90799c781011d863'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email configuration
-# settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'neelgami467@gmail.com'
 EMAIL_HOST_PASSWORD = 'flxy codw zvjr uctt'
+
+ARTSY_CLIENT_ID = 'e039a27961e532891eda'
+ARTSY_CLIENT_SECRET = '7fdd6cda5e287364d2075aa93a362185'

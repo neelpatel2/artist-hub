@@ -1,0 +1,64 @@
+{% extends 'web/web_base.html' %}
+
+{% block title %}
+News
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        color: #000; /* Set default font color to black */
+    }
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Combined transition for smooth effect */
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .alert {
+        font-size: 1.2rem;
+        font-weight: 600;
+        background-color: #f8d7da; /* Light red background */
+        color: #721c24; /* Dark red text */
+    }
+    .card-img-top {
+        height: 200px;
+        object-fit: cover; /* Ensure the image fits well */
+    }
+    .card-body {
+        display: flex;
+        flex-direction: column; /* Ensure content stacks vertically */
+        justify-content: space-between; /* Space out elements evenly */
+    }
+    .btn {
+        align-self: flex-start; /* Align buttons to the start of the card */
+    }
+</style>
+{% endblock %}
+{% block web %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Latest Headlines: Stay Informed </h1>
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm">
+                <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.description }}</p>
+                    <p>Published At: {{ article.publishedAt}}</p>
+                    <a href="{{ article.url }}" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center" role="alert">
+                No articles found.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

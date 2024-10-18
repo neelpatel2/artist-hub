@@ -52,8 +52,6 @@ class Artist(TimestampModel):
             send_mail(subject, message, from_email, recipient_list)
 
         super(Artist, self).save(*args, **kwargs)
-
-
         # Create ArtistProfile if not exists
         if not hasattr(self, 'artistprofile'):
             ArtistProfile.objects.get_or_create(artist_id=self)
@@ -95,10 +93,10 @@ class ArtistProfile(TimestampModel):
 
 class ArtistCatalogueCategory(TimestampModel):
     name = models.CharField(max_length=255, blank=False, null=False)
+    
 
     def __str__(self):
         return self.name
-
 
 class ArtistCatalogue(TimestampModel):
     POST_FIX = 'catalogue'

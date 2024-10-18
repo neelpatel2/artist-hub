@@ -3,10 +3,166 @@
 {% block title %}
 Dashboard
 {% endblock %}
-
 {% block styles %}
+<style>
+    body {
+        background-color: #ffffff; /* Dark background for the whole page */
+        color: #f8f9fa; /* Light text color */
+        font-family: 'Arial', sans-serif;
+    }
+    .card {
+        background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        border: none;
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px); /* Lift effect on hover */
+    }
+    .title h3 {
+        color: #FFFFFF; /* Slate gray for a subtle and modern look */
+        font-weight: bold;
+    }      
+    .badge {
+        background-color: #007bff; /* Bootstrap primary color for badges */
+        color: #fff; /* White text for badges */
+    }
+    .list-group-item {
+        background-color: #343a40; /* Darker item background */
+        color: #f8f9fa; /* Light text color */
+        border: none;
+    }
+    .list-group-item img {
+        border-radius: 50%; /* Round images */
+        margin-right: 10px; /* Spacing between image and text */
+    }
+    .section {
+        margin-bottom: 20px; /* Space between sections */
+    }
+    .forum-link {
+        color: #ffffff; /* White text for hyperlinks */
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .forum-link:hover {
+        color: #f8f9fa; /* Slightly different white shade for hover effect */
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Light glow effect */
+    }
+
+    .list-group-item {
+        background-color: #343a40; /* Darker background to make the white text stand out */
+        border: none; /* Remove borders */
+        padding: 10px 15px;
+    }
+
+    .list-group-item:hover {
+        background-color: #495057; /* Slight hover effect on list items */
+    }
+</style>
 {% endblock %}
 
 {% block web %}
-dashboard
+<div class="row mt-3 text-center" style="row-gap: 20px;">
+    <div class="col-lg-3 section">
+        <div class="card border">
+            <div class="title">
+                <h3 class="lead fs-3 shadow-sm py-3">Catalogue</h3>
+            </div>
+            <div class="main">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><strong>Total Catalogue</strong></span>
+                        <span class="badge">{{ overall_catalogs }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 section">
+        <div class="card border">
+            <div class="title">
+                <h3 class="lead fs-3 shadow-sm py-3">Events</h3>
+            </div>
+            <div class="main">
+                <ul class="list-group list-group-flush">
+                    <!-- Add Event List Items Here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 section">
+        <div class="card border">
+            <div class="title">
+                <h3 class="lead fs-3 shadow-sm py-3">Tasks</h3>
+            </div>
+            <div class="main">
+                <ul class="list-group list-group-flush">
+                    <!-- Add Task List Items Here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 section">
+        <div class="card border">
+            <div class="title">
+                <h3 class="lead fs-3 shadow-sm py-3">Appointments</h3>
+            </div>
+            <div class="main">
+                <ul class="list-group list-group-flush">
+                    <!-- Add Appointment List Items Here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Community Forums Section -->
+    <div class="col-lg-6 section">
+        <div class="card border">
+            <div class="title">
+                <h3 class="lead fs-3 shadow-sm py-3">Community Forums</h3>
+            </div>
+            <div class="main" style="overflow-y: auto; max-height: 300px;">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="https://www.deviantart.com/" target="_blank" class="forum-link">Devine Art</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="https://www.artsper.com/us/" target="_blank" class="forum-link">Artsper</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="https://www.thisiscolossal.com/category/art/" target="_blank" class="forum-link">Colossal</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="https://www.saatchiart.com/en-in/stories" target="_blank" class="forum-link">Saatchiart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>    
+    <div class="col-lg-6 section">
+        <div class="card border">
+            <div class="title">
+                <h3 class="lead fs-3 shadow-sm py-3">Latest Catalogue</h3>
+            </div>
+            <div class="main" style="overflow-y: auto; max-height: 300px;">
+                <ul class="list-group">
+                    {% for catalog in catalogs %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ catalog.catalogue_image.url }}" class="card-img-top me-2" alt="{{ catalog.title }}" style="height: 50px; width: 50px; border-radius: 5px;">
+                                {{ forloop.counter }}) - 
+                                <a href="{% url 'catalogue_details' catalogue_id=catalog.artist_catalogue_id %}" class="text-light">{{ catalog.title }}</a>
+                            </div>
+                            <span style="font-size: 0.9rem;">{{ catalog.created_at }}</span>
+                        </li>
+                    {% endfor %}
+                          </ul>
+                      </div>
+                 </div>
+             </div>    
+        </div>
+    </div>
+</div>
 {% endblock %}
