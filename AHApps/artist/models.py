@@ -7,11 +7,9 @@ from django.contrib.auth.models import AbstractBaseUser
 from AHApps.master.models import TimestampModel
 from AHApps.master.utils.UNIQUE.generate_password import create_password
 from AHApps.master.utils.UNIQUE.generate_primary_key import create_primary_key
-
 import os
 import uuid
 
-# Create your models here.
 class Artist(TimestampModel):
     artist_id = models.CharField(primary_key=True, max_length=255, blank=True)
     email = models.EmailField(max_length=255, unique=True, null=False, blank=False)
@@ -19,7 +17,6 @@ class Artist(TimestampModel):
     password = models.CharField(max_length=255, blank=True)
     otp = models.CharField(max_length=255, default='545663')
     is_active = models.BooleanField(default=False)
-
 
     def save(self, *args, **kwargs):
         if not self.artist_id:

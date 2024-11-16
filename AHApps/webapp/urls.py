@@ -9,6 +9,4 @@ urlpatterns = [
     path('catalogue/<str:catalogue_id>/', catalogue_detail, name='catalogue_detail'),
     path('login/', login_view, name='login_view'),
     path('new-register/', register_view, name='register_view'),
-    path('search/', search_images, name='search_images'),
-
 ]
