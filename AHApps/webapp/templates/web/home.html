@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artist Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Optional: Add custom styles for button hover effects */
+    .btn-hover:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s ease;
+    }
+    #explore-btn:hover {
+        transform: scale(1.1) translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+ <!-- Hero Section -->
+<section class="relative h-[590px] flex items-center justify-center bg-black text-white">
+    <div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('{% static 'images/back1.jpg' %}');"></div>
+    <div class="relative z-10 container mx-auto px-4 text-center">
+      <h1 class="text-5xl font-bold mb-6">Artist Hub</h1>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Discover and explore the world of art through our curated collections, interactive experiences, and creative community.
+      </p>
+      <button 
+        class="px-6 py-3 bg-secondary text-white rounded-lg text-lg flex items-center justify-center btn-hover mx-auto"
+        id="explore-btn"
+        style="transition: all 0.3s ease; transform: scale(1);"
+      >
+        Start Exploring
+        <span class="ml-2">→</span>
+      </button>
+    </div>
+  </section>
+  
+
+  <!-- Featured Categories -->
+  <section class="container mx-auto px-4 py-12">
+  <h2 class="text-3xl font-bold mb-8">Explore Categories</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Digital Art Category -->
+    <div class="group hover:shadow-lg transition-shadow">
+      <div class="p-4">
+        <div class="w-12 h-12 rounded-lg bg-blue-500 flex items-center justify-center text-white mb-4">
+          🖼️
+        </div>
+        <h3 class="text-lg font-bold">Digital Art</h3>
+      </div>
+      <div class="px-4 py-2">
+        <button class="flex items-center text-sm text-gray-500 group-hover:text-gray-700 transition">
+          Explore <span class="ml-2">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Traditional Category -->
+    <div class="group hover:shadow-lg transition-shadow">
+      <div class="p-4">
+        <div class="w-12 h-12 rounded-lg bg-red-500 flex items-center justify-center text-white mb-4">
+          🎨
+        </div>
+        <h3 class="text-lg font-bold">Traditional</h3>
+      </div>
+      <div class="px-4 py-2">
+        <button class="flex items-center text-sm text-gray-500 group-hover:text-gray-700 transition">
+          Explore <span class="ml-2">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Events Category -->
+    <div class="group hover:shadow-lg transition-shadow">
+      <div class="p-4">
+        <div class="w-12 h-12 rounded-lg bg-green-500 flex items-center justify-center text-white mb-4">
+          🗓️
+        </div>
+        <h3 class="text-lg font-bold">Events</h3>
+      </div>
+      <div class="px-4 py-2">
+        <button class="flex items-center text-sm text-gray-500 group-hover:text-gray-700 transition">
+          Explore <span class="ml-2">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Art Games Category -->
+    <div class="group hover:shadow-lg transition-shadow">
+      <div class="p-4">
+        <div class="w-12 h-12 rounded-lg bg-purple-500 flex items-center justify-center text-white mb-4">
+          🎮
+        </div>
+        <h3 class="text-lg font-bold">Art Games</h3>
+      </div>
+      <div class="px-4 py-2">
+        <button class="flex items-center text-sm text-gray-500 group-hover:text-gray-700 transition">
+          Explore <span class="ml-2">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Featured Artworks -->
+  <section class="bg-gray-50 py-12">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8">Featured Artworks</h2>
+      <div class="overflow-x-auto">
+        <div class="flex space-x-4">
+          <div class="w-[300px] shrink-0 bg-white rounded-lg overflow-hidden shadow">
+            <div class="aspect-[4/3] bg-cover bg-center" style="background-image: url('/placeholder.svg?height=225&width=300');"></div>
+            <div class="p-4">
+              <h3 class="font-bold">Artwork Title 1</h3>
+              <p class="text-sm text-gray-500">Artist Name</p>
+            </div>
+          </div>
+          <!-- Add similar cards for more artworks -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discover Art Section -->
+  <section class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold mb-8">Discover Art</h2>
+    <div>
+      <div class="grid grid-cols-3 gap-2 w-full max-w-md">
+        <button class="py-2 px-4 bg-gray-200 rounded-t-lg tab-btn" data-tab="daily">Daily Pick</button>
+        <button class="py-2 px-4 bg-gray-200 tab-btn" data-tab="trending">Trending</button>
+        <button class="py-2 px-4 bg-gray-200 tab-btn" data-tab="challenges">Challenges</button>
+      </div>
+      <div class="mt-6">
+        <div id="tab-content" class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-xl font-bold">Artwork of the Day</h3>
+          <p class="text-gray-500">Discover something new every day</p>
+          <div class="mt-4 aspect-video bg-gray-200 rounded-lg" style="background-image: url('/placeholder.svg?height=400&width=600');"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <!-- Call to Action -->
+<section class="bg-black text-white py-16">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-6">Join Our Creative Community</h2>
+    <p class="text-lg mb-8 max-w-2xl mx-auto">
+      Connect with fellow artists, share your work, and get inspired by amazing creations from around the world
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button class="px-6 py-3 bg-secondary text-white rounded-lg">Sign Up Now</button>
+      <button class="px-6 py-3 border border-secondary text-secondary rounded-lg">Learn More</button>
+    </div>
+  </div>
+</section>
+
+
+  <!-- JavaScript -->
+  <script>
+    // Hero Section Button Click
+    document.getElementById('explore-btn').addEventListener('click', () => {
+      alert('Welcome to Artist Hub!');
+    });
+
+    // Tab Switching
+    document.querySelectorAll('.tab-btn').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const tab = e.target.getAttribute('data-tab');
+        const content = document.getElementById('tab-content');
+        let tabTitle = "Artwork of the Day";
+        let tabDescription = "Discover something new every day";
+
+        if (tab === 'trending') {
+          tabTitle = "Trending Artwork";
+          tabDescription = "Explore the most popular creations.";
+        } else if (tab === 'challenges') {
+          tabTitle = "Creative Challenges";
+          tabDescription = "Take part in exciting challenges.";
+        }
+
+        content.innerHTML = `
+          <h3 class="text-xl font-bold">${tabTitle}</h3>
+          <p class="text-gray-500">${tabDescription}</p>
+          <div class="mt-4 aspect-video bg-gray-200 rounded-lg" style="background-image: url('/placeholder.svg?height=400&width=600');"></div>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>

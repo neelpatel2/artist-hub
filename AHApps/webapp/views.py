@@ -36,4 +36,6 @@ def search_images(request):
 
     return render(request, 'web/art.html', {'images': images})
 
-
+def home(request):
+    catalogues = ArtistCatalogue.objects.all()[12:]  # Fetch all catalogues
+    return render(request, 'web/home.html', {'catalogues': catalogues})
