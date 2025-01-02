@@ -5,14 +5,12 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from AHApps.artist.models import Artist, ArtistProfile,ArtistCatalogue,ArtistCatalogueCategory
 
+
 def base(request):
+    # Fetch all catalogues without pagination
     catalogues = ArtistCatalogue.objects.all()  
-    paginator = Paginator(catalogues, 10)  
-
-    page_number = request.GET.get('page')  
-    page_obj = paginator.get_page(page_number)  
-
-    return render(request, 'web/base.html', {'page_obj': page_obj})
+    
+    return render(request, 'web/base.html', {'catalogues': catalogues})
 
 def catalogue_detail(request, catalogue_id):
     artist_catalog = ArtistCatalogue.objects.filter(artist_catalogue_id=catalogue_id).prefetch_related('categories').first()

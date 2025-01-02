@@ -111,13 +111,6 @@
         bottom: 0;
         width: 100%;
       }
-      .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        padding: 10px;
-      }
       .step-links a {
         text-decoration: none;
         color: #3498db;
@@ -141,8 +134,40 @@
         border-radius: 5px;
         border: 1px solid #ddd;
       }
+
+      /* Styling for the search bar */
+      .search-bar,
+      .search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .search-form input {
+        padding: 10px;
+        flex-grow: 1;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        font-size: 16px;
+      }
+
+      .search-form button {
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .search-form button:hover {
+        background-color: #2980b9;
+      }
     </style>
-    {% block styles %}{% endblock %}
+  {% block styles %}{% endblock %}
+
   </head>
   <body>
     <nav class="bg-white shadow-md">
@@ -160,27 +185,28 @@
           </span>
         </div>
         <div class="flex space-x-6 text-gray-600 font-semibold">
-          <a class="nav-link" href="{% url  'base' %}">Home</a>
-          <a class="nav-link" href="{% url  'search_images' %}"> Images</a>
+          <a class="nav-link" href="{% url 'base' %}">Home</a>
+          <a class="nav-link" href="{% url 'search_images' %}">Images</a>
           <a class="nav-link" href="#">News</a>
           <a class="nav-link" href="#">Contact Us</a>
         </div>
-        <div class="flex space-x-6 text-gray-600 font-semibold items-center">
-          <a class="search-link" href="#" onclick="toggleSearchBox()">
-            <i class="fas fa-search"></i>
-          </a>
-        <div class="btn-container">
-          <a class="btn signup-link" href="{% url 'register_view' %}">Sign Up</a>
-          <a class="btn login-link" href="{% url 'login_view'%}">Login</a>
+        <div class="flex items-center space-x-4">
+          <!-- Search bar in navbar -->
+          <form method="GET" action="" class="search-form">
+            <input type="text" name="query" id="searchInput" placeholder="Search...">
+            <button type="submit">Search</button>
+          </form>
+          <div class="btn-container">
+            <a class="btn signup-link" href="{% url 'register_view' %}">Sign Up</a>
+            <a class="btn login-link" href="{% url 'login_view'%}">Login</a>
+          </div>
         </div>
       </div>
-      <div class="container mx-auto px-4 py-2" id="searchBox" style="display: none">
-        <input class="w-full p-2 border border-gray-300 rounded" placeholder="Search..." type="text" />
-      </div>
     </nav>
+
     <div class="container mt-4">
       <div class="masonry">
-        {% for catalogue in page_obj %}
+                {% for catalogue in catalogues %}
         <div class="card">
           <a href="{% url 'catalogue_detail' catalogue_id=catalogue.artist_catalogue_id %}">
             <img src="{{ catalogue.catalogue_image.url }}" alt="{{ catalogue.title }}" class="card-img-top" />
@@ -188,32 +214,24 @@
           <div class="card-body">
             <h5 class="card-title">
               <a href="{% url 'catalogue_detail' catalogue_id=catalogue.artist_catalogue_id %}" style="text-decoration: none; color: inherit">
-                {{ catalogue.title }}
-              </a>
+              {{ catalogue.title }}
+             </a>
             </h5>
           </div>
         </div>
         {% empty %}
+        <p>No catalogues available.</p>
         {% endfor %}
       </div>
+    </div>    
       {% block web %} {% endblock %}
-      <div class="pagination mt-4">
-        <span class="step-links">
-          {% if page_obj.has_previous %}
-          <a href="?page=1">&laquo; first</a>
-          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-          {% endif %}
-          <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-          {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">next</a>
-          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-          {% endif %}
         </span>
       </div>
-    </div>
+    </div> 
     <footer>
       <p>&copy; 2024 ARTIST-HUB. All rights reserved.</p>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

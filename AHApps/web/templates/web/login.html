@@ -14,7 +14,7 @@ Login
 </head>
 <style>
     body {
-        background-color:rgb(226, 229, 232);
+        background-color: rgb(255, 255, 255);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -25,11 +25,11 @@ Login
         background: #FFFFFF;
         border: 1px solid #ddd;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 30px 45px rgba(0, 0, 0, 0.1);
         display: flex;
-        max-width: 900px;
-        width: 80%;
-        height: 500px;
+        width: 90%;
+        height: 90%; /* Expand height to fill more of the page */
+         /* Allow for larger max width */
         overflow: hidden;
     }
     .image-section {
@@ -54,9 +54,13 @@ Login
         justify-content: center;
         height: 100%;
     }
+    
+    
     .header-pacifico-regular {
-        transform: translateY(-15px); /* Lift the heading upward by 10 pixels */
+        transform: translateY(-15px);
         text-align: center;
+        font-weight:border;
+        font-size: 50px;
     }
     .form-control::placeholder {
         color: #868686;
@@ -68,7 +72,6 @@ Login
         color: #555;
         font-weight: bold;
         font-size: 1.1rem;
-        transform-origin: left;
         transition: all 0.3s ease;
     }
     .form-control:focus {
@@ -89,27 +92,28 @@ Login
         padding-left: 35px;
     }
     .logo-container {
-        margin-bottom: 0; /* Remove bottom spacing */
+        margin-bottom: 0;
         display: flex;
         justify-content: center;
-        transform: translateY(-25px); /* Lift the logo upward by 20px */
-    }  
+        transform: translateY(-25px);
+      
+    }
+    
     .btn-dark {
         font-weight: bold;
-        background-color: #000; /* Black background */
-        color: #fff; /* White text */
+        background-color: #000;
+        color: #fff;
         font-size: 1.2rem;
         border: none;
         border-radius: 12px;
         transition: all 0.3s ease;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transform-origin: center;
         text-transform: uppercase;
         font-weight: bold;
         padding: 0.75rem;
     }
     .btn-dark:hover {
-        background-color: #222; /* Slightly lighter black on hover */
+        background-color: #222;
         transform: scale(1.05);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         text-decoration: none;
@@ -120,7 +124,7 @@ Login
     }
     .btn-dark:focus {
         outline: none;
-    }     
+    }
     .btn {
         margin-top: 1rem;
         padding: 0.75rem;
@@ -144,7 +148,7 @@ Login
     </div>
     <div class="login-section">
         <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" height="100px" alt="Logo">
+            <img src="{% static 'images/logo.png' %}" height="170px" alt="Logo">
         </div>
         <h2 class="text-center header-pacifico-regular mb-3">Login</h2>
         <!-- Start message section -->
@@ -160,7 +164,7 @@ Login
         <!-- End message section -->
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="mb-3">
+            <div class="mb-3 fs-4" >
                 <label for="artist_id" class="form-label" style="font-weight: bold;">Artist ID</label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">
@@ -169,7 +173,7 @@ Login
                     <input type="text" class="form-control" id="artist_id" name="artist_id" placeholder="User name Ex(AH000)" required>
                 </div>
             </div>            
-            <div class="mb-3">
+            <div class="mb-3 fs-4">
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group">
                     <span class="input-group-text">
@@ -180,7 +184,7 @@ Login
             </div>
             <button type="submit" class="btn btn-dark w-100">Login</button>
 
-            <div class="d-flex justify-content-between mt-2">
+            <div class="d-flex justify-content-between mt-2 fs-5">
                 <a href="{% url 'forgot_password_view' %}">Forgot password?</a>
                 <a href="{% url 'register_view' %}">New user?</a>
             </div>

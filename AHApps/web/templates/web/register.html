@@ -15,7 +15,7 @@ Register
 
 <style>
     body {
-        background-color: rgb(226, 229, 232);
+        background-color: rgb(255, 255, 255);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -28,9 +28,9 @@ Register
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: flex;
-        max-width: 900px;
-        width: 80%;
-        height: 500px;
+        max-width: 1500px;
+        width: 85%;
+        height: 650px;
         overflow: hidden;
     }
     .image-section {
@@ -120,12 +120,12 @@ Register
     </div>
     <!-- Registration Form Section -->
     <div class="registration-section">
-        <div class="logo-container mb-4">
-            <img src="{% static 'images/logo.png' %}" height="100px" alt="Logo">
+        <div class="logo-container mb-4 fs-5 ">
+            <img src="{% static 'images/logo.png' %}" height="170px" alt="Logo">
         </div>
-        <h2 class="text-center header-pacifico-regular mb-3">Register</h2>
+        <h2 class="text-center header-pacifico-regular mb-3 fs-1 fw-bolde" >Register</h2>
 <!-- Added Note -->
-<p class="text-center text-dark mt-2">
+<p class="text-center text-dark mt-2 fs-4">
     <strong>Note:</strong> Register only if you are a verified artist.
 </p>
 <!-- Start message section -->
@@ -142,7 +142,7 @@ Register
         <form action="" method="post">
             {% csrf_token %}
             <!-- Email Field -->
-            <div class="mb-3">
+            <div class="mb-3 fs-4">
                 <label for="email" class="form-label">Email Address</label>
                 <div class="input-group">
                     <span class="input-group-text">
@@ -152,7 +152,7 @@ Register
                 </div>
             </div>
             <!-- Mobile Number Field -->
-            <div class="mb-3">
+            <div class="mb-3 fs-4">
                 <label for="mobile" class="form-label">Mobile</label>
                 <div class="input-group">
                     <span class="input-group-text">
@@ -165,7 +165,7 @@ Register
             <button type="submit" class="btn btn-dark w-100 mt-2">Register Request</button>
 
             <!-- Center the link for already have an account -->
-            <div class="text-center mt-2">
+            <div class="text-center mt-2 fs-3">
                 <a href="{% url 'login_view' %}" class="btn btn-link">Already have an account?</a>
             </div>
         </form>
